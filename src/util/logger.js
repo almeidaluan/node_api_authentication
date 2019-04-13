@@ -1,22 +1,24 @@
 const { winston, format, createLogger, transports } = require('winston')
-const { combine, timestamp, label, printf, json } = format;
+const { combine, timestamp, label, printf, json, colorize } = format;
 
 const myFormat = printf(({ level, message, label, timestamp }) => {
     return `${timestamp} [${level}]: ${message}`;
 });
 
-
-
 const logger = createLogger({
-    level: 'info',
-    format: combine(timestamp(), myFormat),
+    levels: {
+        'info': 0,
+        'ok': 1,
+        'error': 2
+    },
+    format: combine(timestamp(), myFormat, colorize()),
     transports: [
         //
         // - Write to all logs with level `info` and below to `combined.log` 
         // - Write all logs error (and below) to `error.log`.
         //
         new transports.File({ filename: 'error.log', level: 'error' }),
-        new transports.File({ filename: 'combined.log' })
+        new transports.File({ filename: 'combined.log' }),
     ]
 });
 

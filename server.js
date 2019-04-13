@@ -1,5 +1,11 @@
-const app = require('express')()
+const express = require('express')
 
+const app = express()
+
+app.use(express.json())
 app.use('/api', require('./routes'))
 
-app.listen(3333)
+
+require('dotenv').config()
+require('./src/db/database')
+app.listen(8080)

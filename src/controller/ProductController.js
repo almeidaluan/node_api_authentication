@@ -4,10 +4,7 @@ const logger = require('./../util/logger')
 module.exports = {
 
     async index(req, res) {
-        logger.info(`${req.method} - Acessando rota Index de product`)
-        res.send("Bem vindo")
-
+        logger.info(`${req.method} - Entrando no fluxo da pagina Index de Produtos`)
+        res.send('pagina inicial de produtos')
     }
-
-
 }
