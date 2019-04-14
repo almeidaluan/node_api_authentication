@@ -21,7 +21,7 @@ module.exports = {
             if (data) return res.status(400).send({ error: 'Usuario ja registrado' });
 
             const userCreated = User.create(req.body, (err, data) => {
-                if (err) return res.send({ error: 'Erro ao retornar usuario' })
+                if (err) return res.send({ error: 'Erro ao criar usuario' })
                 return res.status(201).send(data)
             })
         })
