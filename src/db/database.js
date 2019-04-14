@@ -11,3 +11,4 @@ mongoose.connection.on('error', (err) => {
 mongoose.connection.on('disconnected', () => {
     logger.error(`Aplicação desconectada  do banco de dados`)
 })
+mongoose.set('useCreateIndex', true);
