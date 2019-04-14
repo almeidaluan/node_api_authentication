@@ -7,21 +7,21 @@ module.exports = {
 
     async index(req, res) {
         logger.info(`${req.method} - Entrando no fluxo da pagina Index de Usuarios`)
-        const listaDeUsuarios = await User.find({})
-        return res.send(listaDeUsuarios)
+        const listUsers = await User.find({})
+        return res.send(listUsers)
     },
 
     async store(req, res) {
 
         const { email, password } = req.body
 
-        if (!email || !password) return res.status(400).json({ error: "Dados insuficientes" })
+        if (!email || !password) return res.status(400).json({ error: "insufficient data" })
         User.findOne({ email }, (err, data) => { // {email:email}
-            if (err) return res.status(400).send({ error: 'Erro ao buscar usuario !' });
-            if (data) return res.status(400).send({ error: 'Usuario ja registrado' });
+            if (err) return res.status(400).send({ error: 'Error search user !' });
+            if (data) return res.status(400).send({ error: 'user has account' });
 
             const userCreated = User.create(req.body, (err, data) => {
-                if (err) return res.send({ error: 'Erro ao criar usuario' })
+                if (err) return res.send({ error: 'error create user' })
                 return res.status(201).send(data)
             })
         })
